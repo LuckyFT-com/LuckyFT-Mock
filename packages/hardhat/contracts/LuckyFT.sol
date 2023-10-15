@@ -12,7 +12,6 @@ import "@chainlink/contracts/src/v0.8/vrf/VRFV2WrapperConsumerBase.sol";
 
 contract LuckyFT is
 	ERC1155,
-	Ownable,
 	ERC1155Burnable,
 	ERC1155Supply,
 	VRFV2WrapperConsumerBase,
@@ -24,16 +23,15 @@ contract LuckyFT is
 		address initialOwner
 	)
 		ERC1155("LuckyFT")
-		Ownable(initialOwner)
 		ConfirmedOwner(msg.sender)
 		VRFV2WrapperConsumerBase(linkAddress, wrapperAddress)
 	{}
 
 	uint256 currentTokenId = 1;
-	uint256 price = 0.01 ether;
+	uint256 price = 0.0001 ether;
 	mapping(uint256 => address) tokenOwnerMap; // id => address
 	mapping(address => uint256) tokenIdMap; // address => id
-	mapping(uint256 => mapping (address => bool)) tokenMinterMap;
+	mapping(uint256 => mapping(address => bool)) tokenMinterMap;
 	mapping(uint256 => address[]) tokenMinterArr;
 	mapping(address => uint256) userBalance;
 	mapping(uint256 => uint256) tokenBalance;
@@ -41,6 +39,10 @@ contract LuckyFT is
 
 	function setURI(string memory newuri) public onlyOwner {
 		_setURI(newuri);
+	}
+
+	function updatePrice(uint256 _price) public onlyOwner {
+		price = _price;
 	}
 
 	function createFT() public payable {
@@ -60,7 +62,7 @@ contract LuckyFT is
 			tokenIdMap[createdBy] != 0,
 			"you need to create a LuckyFT first"
 		);
-		require(tokenMinterMap[id][createdBy], 'You already mint this FT');
+		require(tokenMinterMap[id][createdBy], "You already mint this FT");
 
 		tokenMinterMap[id][createdBy] = true;
 		tokenMinterArr[id].push(createdBy);
@@ -68,7 +70,6 @@ contract LuckyFT is
 
 		uint256 requestId = requestRandomWords();
 		requestIdMap[requestId] = [id, price];
-
 	}
 
 	function getOwnerById(uint256 tokenId) public view returns (address) {
@@ -177,33 +178,49 @@ contract LuckyFT is
 			s_requests[_requestId].paid
 		);
 
-		uint256[] params = requestIdMap[_requestId];
+		uint256[] memory params = requestIdMap[_requestId];
 		uint256 id = params[0];
-		uint256 price = params[1];
-		uint256 rewardVal = price / 10;
-		 
-		uint256 totalSupply = totalSupply(id);
+		uint256 rewardVal = params[1] / 10;
+
+		uint256 totalSupply = super.totalSupply(id);
 		uint256 rewardInFTIndex = _randomWords[0] % totalSupply;
 		// some random minter in current room
 		userBalance[tokenMinterArr[id][rewardInFTIndex]] += rewardVal;
 
-		uint256 rewardRoomInGlobalIndex = (_randomWords[1] % (currentTokenId - 1) + 1);
+		uint256 rewardRoomInGlobalIndex = ((_randomWords[1] %
+			(currentTokenId - 1)) + 1);
 		// some random room owner
 		userBalance[tokenOwnerMap[rewardRoomInGlobalIndex]] += rewardVal;
 
 		// random room's random minter
-		uint256 globalRoomSupply = totalSupply(rewardRoomInGlobalIndex);
+		uint256 globalRoomSupply = super.totalSupply(rewardRoomInGlobalIndex);
 		uint256 rewardFTInGlobalRoomIndex = _randomWords[2] % globalRoomSupply;
-		userBalance[tokenMinterArr[rewardRoomInGlobalIndex][rewardFTInGlobalRoomIndex]] += rewardVal;
+		userBalance[
+			tokenMinterArr[rewardRoomInGlobalIndex][rewardFTInGlobalRoomIndex]
+		] += rewardVal;
 
-		emit RewardLucky(
-			id,
-			price,
-			rewardInFTIndex,
-			rewardRoomInGlobalIndex,
-			rewardFTInGlobalRoomIndex,
-		)
+		// uint256[] memory params1 = [
+		// 	id,
+		// 	price,
+		// 	rewardInFTIndex,
+		// 	rewardRoomInGlobalIndex,
+		// 	rewardFTInGlobalRoomIndex
+		// ];
+		// address[] calldata params2 = [
+		// 	tokenMinterArr[id][rewardInFTIndex],
+		// 	tokenOwnerMap[rewardRoomInGlobalIndex],
+		// 	tokenMinterArr[rewardRoomInGlobalIndex][rewardFTInGlobalRoomIndex]
+		// ];
+
+		// emit RewardLucky(params1, params2);
 	}
+
+	event RewardLucky(
+		// id, price
+		uint256[5] params1,
+		// inFTAddress, globalRoomOwnerAddress, globalRoomFTAddress
+		address[3] params2
+	);
 
 	function getRequestStatus(
 		uint256 _requestId
