@@ -19,14 +19,6 @@ contract LuckyFT is
 {
 	using Math for uint256;
 
-	constructor(
-		address initialOwner
-	)
-		ERC1155("LuckyFT")
-		ConfirmedOwner(msg.sender)
-		VRFV2WrapperConsumerBase(linkAddress, wrapperAddress)
-	{}
-
 	uint256 currentTokenId = 1;
 	uint256 price = 0.0001 ether;
 	mapping(uint256 => address) tokenOwnerMap; // id => address
@@ -36,6 +28,14 @@ contract LuckyFT is
 	mapping(address => uint256) userBalance;
 	mapping(uint256 => uint256) tokenBalance;
 	mapping(uint256 => uint256[]) requestIdMap;
+
+	constructor(
+		address initialOwner
+	)
+		ERC1155("LuckyFT")
+		ConfirmedOwner(msg.sender)
+		VRFV2WrapperConsumerBase(linkAddress, wrapperAddress)
+	{}
 
 	function setURI(string memory newuri) public onlyOwner {
 		_setURI(newuri);
@@ -172,11 +172,6 @@ contract LuckyFT is
 		require(s_requests[_requestId].paid > 0, "request not found");
 		s_requests[_requestId].fulfilled = true;
 		s_requests[_requestId].randomWords = _randomWords;
-		emit RequestFulfilled(
-			_requestId,
-			_randomWords,
-			s_requests[_requestId].paid
-		);
 
 		uint256[] memory params = requestIdMap[_requestId];
 		uint256 id = params[0];
@@ -199,6 +194,12 @@ contract LuckyFT is
 			tokenMinterArr[rewardRoomInGlobalIndex][rewardFTInGlobalRoomIndex]
 		] += rewardVal;
 
+		emit RequestFulfilled(
+			_requestId,
+			_randomWords,
+			s_requests[_requestId].paid
+		);
+
 		// uint256[] memory params1 = [
 		// 	id,
 		// 	price,
@@ -214,13 +215,6 @@ contract LuckyFT is
 
 		// emit RewardLucky(params1, params2);
 	}
-
-	event RewardLucky(
-		// id, price
-		uint256[5] params1,
-		// inFTAddress, globalRoomOwnerAddress, globalRoomFTAddress
-		address[3] params2
-	);
 
 	function getRequestStatus(
 		uint256 _requestId
