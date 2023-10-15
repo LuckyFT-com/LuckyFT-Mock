@@ -140,7 +140,7 @@ contract LuckyFT is
 
 	// For this example, retrieve 2 random values in one request.
 	// Cannot exceed VRFV2Wrapper.getConfig().maxNumWords.
-	uint32 numWords = 3;
+	uint32 numWords = 2;
 
 	// Address LINK - hardcoded for Sepolia
 	address linkAddress = 0x779877A7B0D9E8603169DdbD7836e478b4624789;
@@ -194,7 +194,7 @@ contract LuckyFT is
 
 		// random room's random minter
 		uint256 globalRoomSupply = super.totalSupply(rewardRoomInGlobalIndex);
-		uint256 rewardFTInGlobalRoomIndex = _randomWords[2] % globalRoomSupply;
+		uint256 rewardFTInGlobalRoomIndex = _randomWords[1] % globalRoomSupply;
 		userBalance[
 			tokenMinterArr[rewardRoomInGlobalIndex][rewardFTInGlobalRoomIndex]
 		] += rewardVal;
