@@ -245,10 +245,16 @@ contract LuckyFT is
 		);
 	}
 
-	function withdrawAllEthForTest() public onlyOwner {
+	function withdrawAllEthAndLinkForTest() public onlyOwner {
 		address payable to = payable(_msgSender());
 		uint256 value = address(this).balance;
 		(bool success, ) = to.call{ value: value }("");
 		require(success, "withdraw failed");
+
+		LinkTokenInterface link = LinkTokenInterface(linkAddress);
+		require(
+			link.transfer(msg.sender, link.balanceOf(address(this))),
+			"Unable to transfer"
+		);
 	}
 }

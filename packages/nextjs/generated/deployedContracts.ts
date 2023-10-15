@@ -5,7 +5,7 @@ const contracts = {
       name: "sepolia",
       contracts: {
         LuckyFT: {
-          address: "0xdeCD14d7dC0b14bCaBD549a16FFb8A14A5F709d6",
+          address: "0xe73A81427449dd30eF81804C36224994A0Ff33F3",
           abi: [
             {
               inputs: [
@@ -859,7 +859,7 @@ const contracts = {
             },
             {
               inputs: [],
-              name: "withdrawAllEthForTest",
+              name: "withdrawAllEthAndLinkForTest",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
