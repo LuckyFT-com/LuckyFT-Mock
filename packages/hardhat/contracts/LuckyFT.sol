@@ -177,7 +177,7 @@ contract LuckyFT is
 			s_requests[_requestId].paid
 		);
 
-		uint256[] params = requestIdMap[_requestId]
+		uint256[] params = requestIdMap[_requestId];
 		uint256 id = params[0];
 		uint256 price = params[1];
 		uint256 rewardVal = price / 10;
