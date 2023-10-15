@@ -62,7 +62,7 @@ contract LuckyFT is
 			tokenIdMap[createdBy] != 0,
 			"you need to create a LuckyFT first"
 		);
-		require(tokenMinterMap[id][createdBy], "You already mint this FT");
+		require(!tokenMinterMap[id][createdBy], "You already mint this FT");
 
 		tokenMinterMap[id][createdBy] = true;
 		tokenMinterArr[id].push(createdBy);
