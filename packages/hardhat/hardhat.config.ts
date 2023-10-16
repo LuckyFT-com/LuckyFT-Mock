@@ -5,6 +5,8 @@ import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
 import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
+import "hardhat-watcher";
+import "chai";
 
 // If not set, it uses ours Alchemy's default API key.
 // You can get your own at https://dashboard.alchemyapi.io
@@ -16,8 +18,41 @@ const deployerPrivateKey =
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 
 const config: HardhatUserConfig = {
+  watcher: {
+    // [key: string]: { // key is the name for the watcherTask
+    //   tasks?: (string | { command: string, params?: { [key: string] => any } })[]; // Every task of the hardhat runtime is supported (including other plugins!)
+    //   files?: string[]; // Files, directories or glob patterns to watch for changes. (defaults to `[config.paths.sources]`, which itself defaults to the `contracts` dir)
+    //   ignoredFiles?: string[]; // Files, directories or glob patterns that should *not* be watched.
+    //   verbose?: boolean; // Turn on for extra logging
+    //   clearOnStart?: boolean; // Turn on to clear the logs (of older task runs) each time before running the task
+    //   start?: string; // Run any desirable command each time before the task runs
+    //   runOnLaunch?: boolean; // Turn on to run tasks immediately on launch. Be aware, tasks will be run with path parameter "none".
+    // },
+    // compilation: {
+    //   tasks: ['compile'],
+    //   files: ['./contracts'],
+    //   ignoredFiles: ['**/.vscode'],
+    //   verbose: true,
+    //   clearOnStart: true,
+    //   start: 'echo Running my compilation task now..',
+    // },
+    // ci: {
+    //   tasks: [
+    //     'clean',
+    //     { command: 'compile', params: { quiet: true } },
+    //     { command: 'test', params: { noCompile: true, testFiles: ['testfile.ts'] } },
+    //   ],
+    // },
+    tdd: {
+      tasks: ["compile", "test", "deploy"],
+      files: ["./contracts", "./test", "./scripts", "./deploy"],
+      verbose: true,
+      clearOnStart: true,
+      start: 'echo "=====>>>TDD restart"',
+    },
+  },
   solidity: {
-    version: "0.8.17",
+    version: "0.8.20",
     settings: {
       optimizer: {
         enabled: true,
@@ -26,7 +61,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "localhost",
+  defaultNetwork: "scrollSepolia",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -123,6 +158,21 @@ const config: HardhatUserConfig = {
     etherscan: {
       apiKey: `${etherscanApiKey}`,
     },
+  },
+  etherscan: {
+    apiKey: {
+      scrollSepolia: "abc",
+    },
+    customChains: [
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://sepolia-blockscout.scroll.io/api",
+          browserURL: "https://sepolia-blockscout.scroll.io/",
+        },
+      },
+    ],
   },
 };
 
