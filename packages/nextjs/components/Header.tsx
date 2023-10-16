@@ -23,11 +23,6 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <BugAntIcon className="w-4 h-4" />,
   },
   {
-    label: "Example UI",
-    href: "/example-ui",
-    icon: <SparklesIcon className="w-4 h-4" />,
-  },
-  {
     label: "CCIP Bridge",
     href: "/ccip-bridge",
     icon: <SparklesIcon className="w-4 h-4" />,
