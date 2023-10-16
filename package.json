@@ -11,7 +11,7 @@
   "scripts": {
     "account": "yarn workspace @se-2/hardhat account",
     "chain": "yarn workspace @se-2/hardhat chain",
-    "clean": "yarn workspace @se-2/hardhat clean",
+    "clean": "rm -rf ./packages/hardhat/artifacts && rm -rf ./packages/hardhat/cache && rm -rf ./packages/hardhat/deployments",
     "fork": "yarn workspace @se-2/hardhat fork",
     "deploy": "yarn workspace @se-2/hardhat deploy",
     "verify": "yarn workspace @se-2/hardhat verify",
