@@ -11,7 +11,7 @@
 
 ## Deployment
 
-* [scrollSepolia](https://sepolia.scrollscan.dev/address/0xe1ed02b3265edc215270522a2b2b7c682b409515)
+* [scrollSepolia deploy and verified](https://sepolia-blockscout.scroll.io/address/0x6d3664a28573e26FDD4C41ab21b2703c81eB189c#code)
 * [sepolia](https://sepolia.etherscan.io/address/0x7e8a36c00e54c5865673dca380bc34a3748dd53d)
 
 
