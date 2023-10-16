@@ -866,7 +866,7 @@ const contracts = {
       name: "sepolia",
       contracts: {
         LuckyFT: {
-          address: "0x61ED665BDf85Dc206492A37A69324eE11e74B032",
+          address: "0x2D8Cd46ffF8759890eF9aa8D9a89e15316CC0936",
           abi: [
             {
               inputs: [
@@ -874,6 +874,11 @@ const contracts = {
                   internalType: "address",
                   name: "initialOwner",
                   type: "address",
+                },
+                {
+                  internalType: "uint64",
+                  name: "subscriptionId",
+                  type: "uint64",
                 },
               ],
               stateMutability: "nonpayable",
@@ -982,6 +987,22 @@ const contracts = {
               type: "error",
             },
             {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "have",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "want",
+                  type: "address",
+                },
+              ],
+              name: "OnlyCoordinatorCanFulfill",
+              type: "error",
+            },
+            {
               anonymous: false,
               inputs: [
                 {
@@ -1059,12 +1080,6 @@ const contracts = {
                   name: "randomWords",
                   type: "uint256[]",
                 },
-                {
-                  indexed: false,
-                  internalType: "uint256",
-                  name: "payment",
-                  type: "uint256",
-                },
               ],
               name: "RequestFulfilled",
               type: "event",
@@ -1086,25 +1101,6 @@ const contracts = {
                 },
               ],
               name: "RequestSent",
-              type: "event",
-            },
-            {
-              anonymous: false,
-              inputs: [
-                {
-                  indexed: false,
-                  internalType: "uint256[5]",
-                  name: "params1",
-                  type: "uint256[5]",
-                },
-                {
-                  indexed: false,
-                  internalType: "address[3]",
-                  name: "params2",
-                  type: "address[3]",
-                },
-              ],
-              name: "RewardLucky",
               type: "event",
             },
             {
@@ -1377,11 +1373,6 @@ const contracts = {
               name: "getRequestStatus",
               outputs: [
                 {
-                  internalType: "uint256",
-                  name: "paid",
-                  type: "uint256",
-                },
-                {
                   internalType: "bool",
                   name: "fulfilled",
                   type: "bool",
@@ -1468,12 +1459,12 @@ const contracts = {
               inputs: [
                 {
                   internalType: "uint256",
-                  name: "_requestId",
+                  name: "requestId",
                   type: "uint256",
                 },
                 {
                   internalType: "uint256[]",
-                  name: "_randomWords",
+                  name: "randomWords",
                   type: "uint256[]",
                 },
               ],
@@ -1512,13 +1503,13 @@ const contracts = {
               name: "s_requests",
               outputs: [
                 {
-                  internalType: "uint256",
-                  name: "paid",
-                  type: "uint256",
+                  internalType: "bool",
+                  name: "fulfilled",
+                  type: "bool",
                 },
                 {
                   internalType: "bool",
-                  name: "fulfilled",
+                  name: "exists",
                   type: "bool",
                 },
               ],
@@ -1720,14 +1711,7 @@ const contracts = {
             },
             {
               inputs: [],
-              name: "withdrawAllEthAndLinkForTest",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "withdrawLink",
+              name: "withdrawAllForTest",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
