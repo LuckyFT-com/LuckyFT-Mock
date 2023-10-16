@@ -9,11 +9,14 @@
 * Chainlink VRF
 * Scaffold ETH 2
 
-## Deployment
+## Res
 
+* [online demo](https://luckyft.vercel.app/)
+* [video demo](https://www.bilibili.com/video/BV1zN41147N8/)
+* [code](https://github.com/HelloRWA/eth-hangzhou/)
 * [scrollSepolia deploy and verified](https://sepolia-blockscout.scroll.io/address/0x6d3664a28573e26FDD4C41ab21b2703c81eB189c#code)
 * [sepolia](https://sepolia.etherscan.io/address/0x7e8a36c00e54c5865673dca380bc34a3748dd53d)
-
+* [ChainLink VRF ID](https://vrf.chain.link/sepolia/6032) sepolia/6032
 
 **1 项目名称**: LuckyFT
 
@@ -57,7 +60,7 @@ LuckyFT 使用了 ChainLink 的 VRF 功能来产生随机数，部署到 sepolia
 
 **9 项目 github repo 链接:**
 所有代码都在
-<https://github.com/HelloRWA/eth-hangzhou/pull/1>
+<https://github.com/HelloRWA/eth-hangzhou/>
 
 **10 是否基于之前的项目:**
 该项目是本次hackathon期间，从0到1开发的项目，完全原创。
