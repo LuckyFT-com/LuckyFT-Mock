@@ -866,7 +866,7 @@ const contracts = {
       name: "sepolia",
       contracts: {
         LuckyFT: {
-          address: "0xD51144e013e7A7487cbed01836e2F6a67c4f1431",
+          address: "0x3660c514B88e7a5CC059D35769979758cDbBD483",
           abi: [
             {
               inputs: [

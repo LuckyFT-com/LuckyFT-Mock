@@ -13,58 +13,43 @@
 
 * [online demo](https://luckyft.vercel.app/)
 * [video demo](https://www.bilibili.com/video/BV1zN41147N8/)
-* [code](https://github.com/HelloRWA/eth-hangzhou/)
+* [code](https://github.com/HelloRWA/luckyFT/)
 * [scrollSepolia deploy and verified](https://sepolia-blockscout.scroll.io/address/0x6d3664a28573e26FDD4C41ab21b2703c81eB189c#code)
-* [sepolia](https://sepolia.etherscan.io/address/0x7e8a36c00e54c5865673dca380bc34a3748dd53d)
+* [sepolia](https://sepolia.etherscan.io/address/0x3660c514B88e7a5CC059D35769979758cDbBD483)
 * [ChainLink VRF ID](https://vrf.chain.link/sepolia/6032) sepolia/6032
-
-**1 项目名称**: LuckyFT
-
-**2 所选赛道**: Layer2 创新应用
-
-**3 项目图片**:
 
 ![LuckyFT](https://luckyft.vercel.app/lucky-ft.jpg)
 
-**4 简介**:
+## Intro
 
-项目基于 Scaffold ETH 2 开源框架基础上开发的。
-最近 Friend.Tech 比较火，但是他就纯庞氏了，靠拉人头来赚手续费或者 key 涨价，早卖的人赚钱，最后跑路的人血亏。
-LuckyFT 则考虑引入“运气” 来改变这个庞氏的逻辑。一切的一切都是运气！
+The project is build base on the "Scaffold ETH 2" opensource project.
 
-**5 队长和队员**:
+Friend.Tech has been quite popular recently, but it is a pure Ponzi. 
 
-Solo 黑客： Stark: <https://twitter.com/StarkEVM99>
+It relies on attracting people to earn handling fees or key price increases. 
 
-**6 本项目在这次黑客松的目标:**
+Those who sell early make money, and those who run away in the end lose money.
 
-目标：做个好运 FT
+LuckyFT is considering introducing “luck” to change this Ponzi logic. Everything is luck!
 
-LuckyFT 使用了 ChainLink 的 VRF 功能来产生随机数，部署到 sepolia 和 scrollSepolia
 
-**7 黑客松前两日的进度**
-* Day 0:
-  * [x] GitHub fork scaffold eth 2：<https://github.com/HelloRWA/eth-hangzhou>
-  * [x] 学习 chainLink 及 scroll 相关知识
-* Day 1: 实现具体功能
+## Team
 
-1. 用户首先得 createFT，持有一个 FT 后，才可以买别人的 key
-2. 买 key 时，支付 price 费用，是 `buy` 方法，里面会触发 chainlink 的 requestRandomWords 方法，同时给用户发 key
-3. chainlink 的 VRF 回调 fulfillRandomWords时，则会根据获得的随机数来决定运气分配
-4. 同个房的某个人有好运获得 10% 的分成
-5. 其他某个好运房的房主获得 10% 的分成
-6. 上面好运房的某个key 持有者有好运获得 10% 的分成
+Solo Hacker： Stark: <https://twitter.com/StarkEVM99>
 
-**8 视频链接:**
-<https://www.bilibili.com/video/BV1zN41147N8/>
+## What we do
 
-**9 项目 github repo 链接:**
-所有代码都在
-<https://github.com/HelloRWA/eth-hangzhou/>
+LuckyFT use the  ChainLink  VRF feature to generate randome number, and deploy to sepolia 和 scrollSepolia
 
-**10 是否基于之前的项目:**
-该项目是本次hackathon期间，从0到1开发的项目，完全原创。
+1. Users must first create FT. After holding a FT, they can buy other people’s keys.
+2. When buying a key, you pay the price, which is the `buy` method, which triggers the requestRandomWords method of the chainlink and sends the key to the user at the same time.
+3. When chainlink's VRF calls back fulfillRandomWords, the luck distribution will be determined based on the random number obtained.
+4. Someone in the same room is lucky enough to get 10% of the share
+5. The owner of one of the other Lucky Houses gets a 10% share
+6. A key holder of the above Lucky Room has good luck and gets 10% of the share.
 
-**24.11 项目 Demo 链接（选填）:**
+## What's next
 
-<https://luckyft.vercel.app/>
+We will consider to build a fancy UI for this idea later then to push the idea launch on mainnet then.
+
+Also we need chainlink to support scroll mainnet so we can fully run on that.
