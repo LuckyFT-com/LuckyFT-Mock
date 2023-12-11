@@ -13,7 +13,7 @@
 
 * [online demo](https://luckyft.vercel.app/)
 * [video demo](https://www.bilibili.com/video/BV1zN41147N8/)
-* [code](https://github.com/HelloRWA/luckyFT/)
+* [code](https://github.com/LuckyFT-com/LuckyFT-Mock/)
 * [scrollSepolia deploy and verified](https://sepolia-blockscout.scroll.io/address/0x6d3664a28573e26FDD4C41ab21b2703c81eB189c#code)
 * [sepolia](https://sepolia.etherscan.io/address/0x3660c514B88e7a5CC059D35769979758cDbBD483)
 * [ChainLink VRF ID](https://vrf.chain.link/sepolia/6032) sepolia/6032
@@ -31,11 +31,6 @@ It relies on attracting people to earn handling fees or key price increases.
 Those who sell early make money, and those who run away in the end lose money.
 
 LuckyFT is considering introducing “luck” to change this Ponzi logic. Everything is luck!
-
-
-## Team
-
-Solo Hacker： Stark: <https://twitter.com/StarkEVM99>
 
 ## What we do
 
